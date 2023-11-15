@@ -17,11 +17,13 @@ function IntervalForm({ onIntervalAdded }) {
   }, [includeIntervals, excludeIntervals]);
 
   const addInterval = (intervals, setIntervals, start, end) => {
-    // Flip the interval if the start is greater than the end
-    if (start > end) {
-      const temp = start;
-      start = end;
-      end = temp;
+    // Validate input
+    if (end === null || end === undefined || end === ''){
+      setMessage('Please enter a start and end value.');
+      return;
+    } else if (start > end) {
+      setMessage('Start cannot be greater than end.');
+      return;
     }
     
     // Check if the interval already exists
@@ -68,9 +70,13 @@ function IntervalForm({ onIntervalAdded }) {
     <S.Container>
       <S.InputContainer>
       <S.SectionHeader>Include:</S.SectionHeader>
-      <S.InputContainers>
-        <S.Input placeholder="Start" type="number" value={includeStart || ''} onChange={(e) => setIncludeStart(Number(e.target.value))}/>
-        <S.Input placeholder="End" type="number" value={includeEnd || ''} onChange={(e) => setIncludeEnd(Number(e.target.value))}/>
+      <S.InputContainers onSubmit={(e) => {
+          e.preventDefault();
+          addInterval(includeIntervals, setIncludeIntervals, includeStart, includeEnd);
+        }}>
+          <S.Input placeholder="Start" type="number" value={includeStart || ''} onChange={(e) => setIncludeStart(Number(e.target.value))}/>
+          <S.Input placeholder="End" type="number" value={includeEnd || ''} onChange={(e) => setIncludeEnd(Number(e.target.value))}/>
+          <input type="submit" style={{display: 'none'}} />
       </S.InputContainers>
       <S.AddButton type="submit" onClick={() => addInterval(includeIntervals, setIncludeIntervals, includeStart, includeEnd)}>Include</S.AddButton>
     
@@ -86,9 +92,13 @@ function IntervalForm({ onIntervalAdded }) {
 
       <S.InputContainer>
       <S.SectionHeader>Exclude:</S.SectionHeader>
-      <S.InputContainers>
-      <S.Input placeholder="Start" type="number"  value={excludeStart || ''} onChange={(e) => setExcludeStart(Number(e.target.value))}/>
-      <S.Input placeholder="End" type="number"  value={excludeEnd || ''} onChange={(e) => setExcludeEnd(Number(e.target.value))}/>
+      <S.InputContainers onSubmit={(e) => {
+        e.preventDefault();
+        addInterval(excludeIntervals, setExcludeIntervals, excludeStart, excludeEnd);
+      }}>
+        <S.Input placeholder="Start" type="number" value={excludeStart || ''} onChange={(e) => setExcludeStart(Number(e.target.value))}/>
+        <S.Input placeholder="End" type="number" value={excludeEnd || ''} onChange={(e) => setExcludeEnd(Number(e.target.value))}/>
+        <input type="submit" style={{display: 'none'}} />
       </S.InputContainers>
       <S.AddButton type="submit" onClick={() => addInterval(excludeIntervals, setExcludeIntervals, excludeStart, excludeEnd)}>Exclude</S.AddButton>
       <S.IntervalContainer>

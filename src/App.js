@@ -12,6 +12,7 @@ function App() {
 
   return (
     <S.Container>
+      <h1>Interval Processor</h1>
       <IntervalForm onIntervalAdded={handleIntervalAdded} />
       <h2>Output Intervals</h2>
       <S.UL>

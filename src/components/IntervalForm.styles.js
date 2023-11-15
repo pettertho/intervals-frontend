@@ -29,7 +29,7 @@ display: flex;
     gap: 1rem;
     `;
 
-export const InputContainers = styled.div`
+export const InputContainers = styled.form`
     display: flex;
     flex-direction: column;
     `;
