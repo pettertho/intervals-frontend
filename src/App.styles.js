@@ -3,26 +3,24 @@ import styled from "@emotion/styled";
 const pagePaddingRem = 1;
 
 export const Container = styled.div`
-    padding-left: ${pagePaddingRem}rem;
-    padding-right: ${pagePaddingRem}rem;
-    display: flex;
-    flex-direction: column;
-    margin: 2rem;
-    min-width: 2rem;
-    `;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: auto;
+  margin: 0.2rem;
+  border-radius: 1rem;
 
-export const Form = styled.form`
-    padding-left: ${pagePaddingRem}rem;
-    padding-right: ${pagePaddingRem}rem;
-    display: flex;
-    flex-direction: column;
-    margin: 2rem;
-    min-width: 2rem;
-    `;
+  @media (min-width: 768px) {
+    padding: 1rem 2rem;
+`;
 
 export const UL = styled.ul`
-    padding-left: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    `;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const H2 = styled.h2`
+  margin-top: 3rem;
+`;
