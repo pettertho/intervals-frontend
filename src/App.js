@@ -9,8 +9,6 @@ function App() {
   const handleIntervalAdded = newOutput => {
     setOutput(newOutput);
   };
-
-  console.log(output);
   return (
     <S.Container>
       <h1>Interval Processor</h1>

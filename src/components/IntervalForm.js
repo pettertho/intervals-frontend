@@ -19,7 +19,7 @@ function IntervalForm({ onIntervalAdded }) {
 
   const addInterval = (intervals, setIntervals, start, end) => {
     // Validate input
-    if (end === null || end === undefined || end === "") {
+    if (!start || !end) {
       setMessage("Please enter a start and end value!");
       return;
     } else if (start > end) {
@@ -57,7 +57,6 @@ function IntervalForm({ onIntervalAdded }) {
           })),
         }),
       });
-      console.log(includeIntervals, excludeIntervals);
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -69,6 +68,14 @@ function IntervalForm({ onIntervalAdded }) {
     }
   };
 
+  const resetForm = () => {
+    setIncludeIntervals([]);
+    setExcludeIntervals([]);
+    setIncludeStart(null);
+    setIncludeEnd(null);
+    setExcludeStart(null);
+    setExcludeEnd(null);
+  };
   return (
     <>
       {message ? <S.Message>{message}</S.Message> : <S.Message></S.Message>}
@@ -120,18 +127,7 @@ function IntervalForm({ onIntervalAdded }) {
             </S.IntervalUL>
           </S.IntervalContainer>
         </S.InputContainer>
-
-        <S.ResetButton
-          onClick={() => {
-            setIncludeIntervals([]);
-            setExcludeIntervals([]);
-            setIncludeStart(null);
-            setIncludeEnd(null);
-            setExcludeStart(null);
-            setExcludeEnd(null);
-          }}>
-          Reset
-        </S.ResetButton>
+        <S.ResetButton onClick={resetForm}>Reset</S.ResetButton>
       </S.Container>
     </>
   );
